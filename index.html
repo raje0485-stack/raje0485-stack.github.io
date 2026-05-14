@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rajesh BM | Cybersecurity</title>
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --c1:#00d4ff;--c2:#0066ff;--c3:#00f5ff;
+  --acc:#ff6b00;
+  --dark:#010b18;--dark2:#031525;--dark3:#051e35;
+  --border:#0a3060;--text:#b8d8f8;--muted:#2a5a8a;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Rajdhani',sans-serif;background:var(--dark);color:var(--text);min-height:100vh;overflow-x:hidden;}
+a{color:inherit;text-decoration:none;}
+
+/* PARTICLES */
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* ANIMATED GRADIENT BG */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;
+  background:
+    radial-gradient(ellipse at 10% 20%,rgba(0,102,255,0.08) 0%,transparent 50%),
+    radial-gradient(ellipse at 90% 80%,rgba(0,212,255,0.07) 0%,transparent 50%),
+    radial-gradient(ellipse at 50% 50%,rgba(0,245,255,0.03) 0%,transparent 60%);
+  pointer-events:none;
+}
+
+/* KEYFRAMES */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glow{0%,100%{text-shadow:0 0 10px var(--c1),0 0 20px var(--c1)}50%{text-shadow:0 0 25px var(--c1),0 0 50px var(--c1),0 0 80px var(--c2)}}
+@keyframes borderAnim{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes scanline{0%{top:-20%}100%{top:120%}}
+@keyframes typewriter{from{width:0}to{width:100%}}
+@keyframes glitch{
+  0%,100%{transform:translate(0)}
+  20%{transform:translate(-2px,1px)}
+  40%{transform:translate(2px,-1px)}
+  60%{transform:translate(-1px,2px)}
+  80%{transform:translate(1px,-2px)}
+}
+
+/* NAV */
+nav{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1rem 2.5rem;
+  background:rgba(1,11,24,0.95);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+}
+.logo{
+  font-family:'Orbitron',monospace;font-size:14px;letter-spacing:3px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  animation:glow 3s infinite;
+  filter:drop-shadow(0 0 8px rgba(0,212,255,0.4));
+}
+.nav-links{display:flex;gap:2rem;list-style:none;}
+.nav-links a{
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  letter-spacing:2px;text-transform:uppercase;color:var(--muted);
+  transition:all 0.3s;position:relative;padding-bottom:4px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:50%;width:0;height:1px;
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  transition:all 0.3s;transform:translateX(-50%);
+}
+.nav-links a:hover{color:var(--c1);}
+.nav-links a:hover::after{width:100%;}
+
+/* HERO */
+.hero{
+  position:relative;z-index:1;
+  padding:5rem 2.5rem 4rem;max-width:1100px;margin:0 auto;
+  border-bottom:1px solid var(--border);
+}
+.hero-status{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  color:var(--c3);letter-spacing:3px;
+  background:rgba(0,212,255,0.06);border:1px solid rgba(0,212,255,0.15);
+  padding:6px 16px;border-radius:20px;margin-bottom:2rem;
+  animation:fadeUp 0.6s ease both;
+}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--c1);box-shadow:0 0 8px var(--c1);animation:blink 2s infinite;}
+
+.hero-name{
+  font-family:'Orbitron',monospace;font-size:56px;font-weight:900;
+  line-height:1.05;letter-spacing:2px;color:#e8f4ff;
+  animation:fadeUp 0.9s ease both;
+}
+.hero-name span{
+  background:linear-gradient(135deg,var(--c1),var(--c2),var(--c3));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-size:200%;animation:borderAnim 4s linear infinite;
+  display:block;
+}
+
+.hero-role{
+  font-family:'Share Tech Mono',monospace;font-size:13px;
+  color:var(--acc);letter-spacing:5px;margin-top:12px;
+  animation:fadeUp 1.1s ease both;
+}
+
+.hero-desc{
+  font-size:16px;color:var(--muted);max-width:520px;
+  line-height:1.8;margin:1.5rem 0 2.5rem;
+  animation:fadeUp 1.3s ease both;
+}
+
+.btns{display:flex;gap:14px;flex-wrap:wrap;animation:fadeUp 1.5s ease both;}
+.btn{
+  padding:12px 30px;font-family:'Share Tech Mono',monospace;
+  font-size:11px;letter-spacing:2px;cursor:pointer;
+  border:none;transition:all 0.3s;display:inline-block;text-transform:uppercase;
+  position:relative;overflow:hidden;
+}
+.btn::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,0.1),transparent);
+  transform:translateX(-100%);transition:transform 0.5s;
+}
+.btn:hover::before{transform:translateX(100%);}
+.btn-primary{
+  background:linear-gradient(135deg,var(--c2),var(--c1));
+  color:#010b18;font-weight:700;border-radius:3px;
+  box-shadow:0 0 20px rgba(0,102,255,0.3),0 4px 15px rgba(0,0,0,0.3);
+}
+.btn-primary:hover{box-shadow:0 0 40px rgba(0,212,255,0.5),0 6px 20px rgba(0,0,0,0.4);transform:translateY(-3px);}
+.btn-outline{
+  background:transparent;color:var(--c1);
+  border:1px solid var(--c1);border-radius:3px;
+}
+.btn-outline:hover{background:rgba(0,212,255,0.08);box-shadow:0 0 25px rgba(0,212,255,0.2);transform:translateY(-3px);}
+
+/* HEX GRID DECORATION */
+.hex-grid{
+  position:absolute;right:2.5rem;top:4rem;
+  display:grid;grid-template-columns:repeat(5,40px);gap:4px;
+  opacity:0.12;pointer-events:none;
+}
+.hex{
+  width:40px;height:46px;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  clip-path:polygon(50% 0%,100% 25%,100% 75%,50% 100%,0% 75%,0% 25%);
+  animation:float 3s ease-in-out infinite;
+}
+.hex:nth-child(odd){animation-delay:0.5s;}
+.hex:nth-child(3n){animation-delay:1s;background:linear-gradient(135deg,var(--c2),var(--c3));}
+
+/* TERMINAL */
+.terminal{
+  background:var(--dark3);margin-top:3rem;max-width:520px;
+  font-family:'Share Tech Mono',monospace;font-size:13px;
+  border-radius:8px;overflow:hidden;
+  box-shadow:0 25px 60px rgba(0,0,0,0.6),0 0 0 1px var(--border),0 0 40px rgba(0,102,255,0.08);
+  animation:fadeUp 1.7s ease both,float 6s ease-in-out infinite;
+}
+.t-topbar{
+  background:linear-gradient(90deg,#031830,#052040);
+  padding:12px 16px;display:flex;align-items:center;gap:8px;
+  border-bottom:1px solid var(--border);
+}
+.dot{width:12px;height:12px;border-radius:50%;}
+.dot-r{background:#ff5f57;}.dot-y{background:#febc2e;}.dot-g{background:#28c840;}
+.t-title{color:var(--muted);font-size:11px;margin-left:8px;letter-spacing:1px;flex:1;text-align:center;}
+.t-body{padding:1.4rem 1.6rem;position:relative;overflow:hidden;}
+.t-body::after{
+  content:'';position:absolute;left:0;right:0;height:40%;
+  background:linear-gradient(transparent,rgba(0,212,255,0.015),transparent);
+  animation:scanline 5s linear infinite;pointer-events:none;
+}
+.t-line{margin:6px 0;line-height:1.5;}
+.t-prompt{color:var(--c1);}
+.t-cmd{color:#e8f4ff;}
+.t-out{color:var(--muted);}
+.t-warn{color:#38bdf8;}
+.t-success{color:var(--c3);}
+.cursor{display:inline-block;width:8px;height:14px;background:var(--c1);vertical-align:middle;animation:blink 1s infinite;}
+
+/* SECTION */
+.section-wrap{position:relative;z-index:1;max-width:1100px;margin:0 auto;padding:3.5rem 2.5rem;border-bottom:1px solid var(--border);}
+.section-label{
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  letter-spacing:4px;text-transform:uppercase;
+  margin-bottom:2.5rem;display:flex;align-items:center;gap:12px;
+}
+.section-label-text{
+  background:linear-gradient(90deg,var(--c1),var(--c2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.section-label::before{content:'';width:20px;height:2px;background:linear-gradient(90deg,var(--c1),var(--c2));box-shadow:0 0 8px var(--c1);}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent);}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:4rem;}
+.about-text{font-size:15px;line-height:1.9;color:var(--muted);}
+.about-text strong{color:var(--text);}
+.cert-list{list-style:none;}
+.cert-item{
+  display:flex;align-items:center;gap:12px;
+  padding:13px 0;border-bottom:1px solid var(--border);
+  font-size:14px;color:var(--text);
+}
+.cert-item:last-child{border-bottom:none;}
+.cert-dot{
+  width:7px;height:7px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--c1),var(--c2));
+  box-shadow:0 0 10px rgba(0,212,255,0.6);
+}
+.cert-status{
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  color:var(--c1);margin-left:auto;padding:3px 10px;
+  background:rgba(0,212,255,0.07);border:1px solid rgba(0,212,255,0.15);
+  border-radius:10px;letter-spacing:1px;white-space:nowrap;
+}
+.cert-status.planned{color:var(--muted);background:rgba(42,90,138,0.08);border-color:var(--border);}
+
+/* SKILLS */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:14px;}
+.skill-card{
+  background:var(--dark3);border:1px solid var(--border);
+  border-radius:6px;padding:1.3rem;transition:all 0.35s;
+  position:relative;overflow:hidden;
+}
+.skill-card::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,102,255,0.04),rgba(0,212,255,0.02));
+  opacity:0;transition:opacity 0.35s;
+}
+.skill-card::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--c2),var(--c1));
+  transform:scaleX(0);transform-origin:left;transition:transform 0.35s;
+}
+.skill-card:hover{border-color:rgba(0,212,255,0.25);transform:translateY(-5px);box-shadow:0 15px 40px rgba(0,0,0,0.5),0 0 25px rgba(0,102,255,0.08);}
+.skill-card:hover::before{opacity:1;}
+.skill-card:hover::after{transform:scaleX(1);}
+.skill-icon{font-size:24px;margin-bottom:12px;}
+.skill-name{font-size:15px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.skill-level{font-size:11px;color:var(--muted);font-family:'Share Tech Mono',monospace;letter-spacing:1px;}
+.skill-bar{margin-top:12px;height:2px;background:var(--border);border-radius:2px;overflow:hidden;}
+.skill-fill{height:100%;background:linear-gradient(90deg,var(--c2),var(--c1),var(--c3));border-radius:2px;box-shadow:0 0 6px rgba(0,212,255,0.3);}
+
+/* PROJECTS */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px;}
+.project-card{
+  background:var(--dark3);border:1px solid var(--border);
+  border-radius:6px;padding:1.6rem;transition:all 0.35s;
+  position:relative;overflow:hidden;
+}
+.project-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--c1),transparent);
+  opacity:0;transition:opacity 0.35s;
+}
+.project-card:hover{border-color:rgba(0,212,255,0.2);transform:translateY(-5px);box-shadow:0 20px 50px rgba(0,0,0,0.5),0 0 30px rgba(0,102,255,0.07);}
+.project-card:hover::before{opacity:1;}
+.project-status{
+  display:inline-block;font-family:'Share Tech Mono',monospace;font-size:10px;
+  padding:4px 14px;border-radius:12px;margin-bottom:14px;letter-spacing:2px;
+}
+.status-done{background:rgba(0,212,255,0.07);color:var(--c1);border:1px solid rgba(0,212,255,0.18);}
+.status-planned{background:rgba(42,90,138,0.08);color:var(--muted);border:1px solid var(--border);}
+.project-title{font-family:'Orbitron',monospace;font-size:13px;font-weight:700;color:#e8f4ff;margin-bottom:10px;letter-spacing:1px;}
+.project-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:16px;}
+.code-preview{
+  background:var(--dark2);border-left:2px solid var(--c2);
+  padding:12px 16px;margin-bottom:16px;
+  font-family:'Share Tech Mono',monospace;font-size:12px;
+  border-radius:0 4px 4px 0;
+}
+.phase-row{font-size:11px;color:var(--muted);margin-bottom:14px;font-family:'Share Tech Mono',monospace;letter-spacing:1px;}
+.phase-row span{color:var(--c1);}
+.project-tags{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:16px;}
+.tag-pill{
+  font-family:'Share Tech Mono',monospace;font-size:10px;
+  padding:4px 11px;background:rgba(0,102,255,0.06);
+  border:1px solid rgba(0,102,255,0.15);border-radius:2px;
+  color:rgba(0,180,255,0.6);letter-spacing:1px;
+  transition:all 0.2s;
+}
+.tag-pill:hover{background:rgba(0,102,255,0.12);color:var(--c1);}
+.gh-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  letter-spacing:1px;padding:8px 18px;
+  background:linear-gradient(var(--dark3),var(--dark3)) padding-box,
+             linear-gradient(90deg,var(--c2),var(--c1)) border-box;
+  border:1px solid transparent;border-radius:3px;
+  color:var(--c1);transition:all 0.25s;
+}
+.gh-btn:hover{background:linear-gradient(rgba(0,102,255,0.08),rgba(0,102,255,0.08)) padding-box,linear-gradient(90deg,var(--c2),var(--c1)) border-box;transform:translateX(3px);}
+
+/* CONTACT */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px;}
+.contact-card{
+  background:var(--dark3);border:1px solid var(--border);
+  border-radius:6px;padding:1.2rem 1.5rem;
+  display:flex;align-items:center;gap:16px;
+  transition:all 0.3s;
+}
+.contact-card:hover{border-color:rgba(0,212,255,0.2);transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,0.4);}
+.contact-icon{
+  width:42px;height:42px;border-radius:8px;
+  background:linear-gradient(135deg,rgba(0,102,255,0.15),rgba(0,212,255,0.08));
+  border:1px solid rgba(0,102,255,0.2);
+  display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;
+}
+.contact-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-family:'Share Tech Mono',monospace;}
+.contact-val{font-size:14px;color:var(--text);font-weight:500;margin-top:3px;}
+
+/* FOOTER */
+footer{
+  padding:2rem 2.5rem;text-align:center;
+  font-family:'Share Tech Mono',monospace;font-size:11px;
+  color:#0a2a4a;letter-spacing:2px;
+  border-top:1px solid var(--border);
+  position:relative;z-index:1;
+}
+footer span{color:var(--muted);}
+
+@media(max-width:700px){
+  .hero-name{font-size:32px;}
+  .about-grid{grid-template-columns:1fr;}
+  nav{padding:1rem;}
+  .nav-links{gap:1rem;}
+  .section-wrap{padding:2.5rem 1.2rem;}
+  .hero{padding:3rem 1.2rem 2.5rem;}
+  .hex-grid{display:none;}
+}
+</style>
+</head>
+<body>
+
+<canvas id="particles"></canvas>
+
+<nav>
+  <div class="logo">⬡ RAJESH_BM</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hex-grid">
+    <div class="hex"></div><div class="hex"></div><div class="hex"></div><div class="hex"></div><div class="hex"></div>
+    <div class="hex"></div><div class="hex"></div><div class="hex"></div><div class="hex"></div><div class="hex"></div>
+    <div class="hex"></div><div class="hex"></div><div class="hex"></div><div class="hex"></div><div class="hex"></div>
+  </div>
+
+  <div class="hero-status"><div class="status-dot"></div>AVAILABLE FOR OPPORTUNITIES</div>
+  <div class="hero-name">Hi, I'm<span>RAJESH BM</span></div>
+  <div class="hero-role">// CYBERSECURITY STUDENT</div>
+  <p class="hero-desc">Passionate about ethical hacking and network security. Building real Python tools from scratch to develop hands-on skills and protect systems from cyber threats.</p>
+  <div class="btns">
+    <a href="#projects" class="btn btn-primary">View Projects</a>
+    <a href="#contact" class="btn btn-outline">Contact Me</a>
+  </div>
+
+  <div class="terminal">
+    <div class="t-topbar">
+      <div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div>
+      <span class="t-title">bash — rajesh@kali:~</span>
+    </div>
+    <div class="t-body">
+      <div class="t-line"><span class="t-prompt">┌──(</span><span style="color:#00d4ff;">rajesh</span><span class="t-prompt">㉿kali)-[~]</span></div>
+      <div class="t-line"><span class="t-prompt">└─$ </span><span class="t-cmd">python scanner.py -t 127.0.0.1 -p 1-1024</span></div>
+      <div class="t-line" style="margin-top:6px"><span class="t-out">⬡ Initializing scan on 127.0.0.1...</span></div>
+      <div class="t-line"><span class="t-out">⬡ Threads: 50 | Ports: 1-1024</span></div>
+      <div class="t-line" style="margin-top:6px"><span class="t-warn">⚠  Port 135 OPEN — Risk: RPC exposed!</span></div>
+      <div class="t-line"><span class="t-warn">⚠  Port 445 OPEN — Risk: Ransomware risk!</span></div>
+      <div class="t-line" style="margin-top:6px"><span class="t-success">✓  Scan Complete — 2 port(s) found</span></div>
+      <div class="t-line" style="margin-top:8px"><span class="t-prompt">└─$ </span><span class="cursor"></span></div>
+    </div>
+  </div>
+</div>
+
+<div class="section-wrap" id="about">
+  <div class="section-label"><span class="section-label-text">01 // About Me</span></div>
+  <div class="about-grid">
+    <p class="about-text">
+      I'm <strong>Rajesh BM</strong>, a <strong>cybersecurity student</strong> from Bengaluru, India — passionate about ethical hacking and penetration testing.<br><br>
+      I learn by building real tools — a <strong>Port Scanner</strong> and <strong>Password Strength Checker</strong> built from scratch in Python. Every project teaches me how systems work and how to protect them.<br><br>
+      My goal: become a <strong>professional ethical hacker</strong> and help organizations defend against cyber threats.
+    </p>
+    <ul class="cert-list">
+      <li class="cert-item"><div class="cert-dot"></div>Google Cybersecurity Certificate<span class="cert-status">IN PROGRESS</span></li>
+      <li class="cert-item"><div class="cert-dot"></div>TryHackMe — Pre-Security Path<span class="cert-status">IN PROGRESS</span></li>
+      <li class="cert-item"><div class="cert-dot"></div>CompTIA Security+<span class="cert-status planned">PLANNED</span></li>
+      <li class="cert-item"><div class="cert-dot"></div>eJPT — Junior Pentester<span class="cert-status planned">PLANNED</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="section-wrap" id="skills">
+  <div class="section-label"><span class="section-label-text">02 // Skills</span></div>
+  <div class="skills-grid">
+    <div class="skill-card"><div class="skill-icon">🐍</div><div class="skill-name">Python</div><div class="skill-level">LEARNING</div><div class="skill-bar"><div class="skill-fill" style="width:40%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🌐</div><div class="skill-name">Networking</div><div class="skill-level">BEGINNER</div><div class="skill-bar"><div class="skill-fill" style="width:30%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🖥️</div><div class="skill-name">Linux</div><div class="skill-level">BEGINNER</div><div class="skill-bar"><div class="skill-fill" style="width:25%"></div></div></div>
+    <div class="skill-card"><div class="skill-icon">🔐</div><div class="skill-name">Pentesting</div><div class="skill-level">LEARNING</div><div class="skill-bar"><div class="skill-fill" style="width:20%"></div></div></div>
+  </div>
+</div>
+
+<div class="section-wrap" id="projects">
+  <div class="section-label"><span class="section-label-text">03 // Projects</span></div>
+  <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-status status-done">✓ COMPLETED</div>
+      <div class="project-title">Port Scanner Tool</div>
+      <div class="project-desc">Multithreaded Python port scanner for network reconnaissance. Scans 1024 ports and shows real security risks.</div>
+      <div class="code-preview">
+        <div style="color:#2a5a8a;margin-bottom:8px;">// live output</div>
+        <div style="color:#38bdf8;">Port 135 OPEN — Risk: RPC exposed!</div>
+        <div style="color:#38bdf8;">Port 445 OPEN — Risk: Ransomware risk!</div>
+        <div style="color:#00f5ff;margin-top:4px;">Scan Completed! ✓</div>
+      </div>
+      <div class="phase-row"><span>✓</span> Phase 1 &nbsp;<span>✓</span> Phase 2 &nbsp;<span>✓</span> Phase 3 &nbsp;<span>✓</span> Phase 4</div>
+      <div class="project-tags">
+        <span class="tag-pill">PYTHON</span><span class="tag-pill">SOCKETS</span>
+        <span class="tag-pill">THREADPOOL</span><span class="tag-pill">RECON</span>
+      </div>
+      <a href="https://github.com/raje0485-stack/Port-scanner" target="_blank" class="gh-btn">View on GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-status status-done">✓ COMPLETED</div>
+      <div class="project-title">Password Strength Checker</div>
+      <div class="project-desc">Python regex tool that checks password strength across 5 criteria — from Weak to Very Strong instantly.</div>
+      <div class="code-preview">
+        <div style="color:#2a5a8a;margin-bottom:8px;">// live output</div>
+        <div style="color:#2a5a8a;">Enter password: X9#mK@2025!qZ</div>
+        <div style="color:#00f5ff;">Password Strength: Very Strong 💪</div>
+      </div>
+      <div class="phase-row"><span>✓</span> Length &nbsp;<span>✓</span> Uppercase &nbsp;<span>✓</span> Numbers &nbsp;<span>✓</span> Special</div>
+      <div class="project-tags">
+        <span class="tag-pill">PYTHON</span><span class="tag-pill">REGEX</span>
+        <span class="tag-pill">SECURITY</span><span class="tag-pill">PASSWORD</span>
+      </div>
+      <a href="https://github.com/raje0485-stack/password-strength-checker" target="_blank" class="gh-btn">View on GitHub →</a>
+    </div>
+
+    <div class="project-card" style="opacity:0.45;">
+      <div class="project-status status-planned">COMING SOON</div>
+      <div class="project-title">Banner Grabber</div>
+      <div class="project-desc">Identifies software versions on open ports — a key reconnaissance tool in ethical hacking.</div>
+      <div class="project-tags">
+        <span class="tag-pill">PYTHON</span><span class="tag-pill">RECON</span><span class="tag-pill">SOCKETS</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div class="section-wrap" id="contact">
+  <div class="section-label"><span class="section-label-text">04 // Contact</span></div>
+  <div class="contact-grid">
+    <div class="contact-card"><div class="contact-icon">📧</div><div><div class="contact-label">Email</div><div class="contact-val">raje0485@gmail.com</div></div></div>
+    <div class="contact-card"><div class="contact-icon">💼</div><div><div class="contact-label">LinkedIn</div><div class="contact-val"><a href="https://www.linkedin.com/in/rajesh-bm-4883502bb" target="_blank" style="color:#00d4ff;">rajesh-bm</a></div></div></div>
+    <div class="contact-card"><div class="contact-icon">💻</div><div><div class="contact-label">GitHub</div><div class="contact-val"><a href="https://github.com/raje0485-stack" target="_blank" style="color:#00d4ff;">raje0485-stack</a></div></div></div>
+    <div class="contact-card"><div class="contact-icon">📍</div><div><div class="contact-label">Location</div><div class="contact-val">Bengaluru, India</div></div></div>
+  </div>
+</div>
+
+<footer>// RAJESH BM &nbsp;<span>—</span>&nbsp; CYBERSECURITY STUDENT &nbsp;<span>—</span>&nbsp; BENGALURU &nbsp;<span>—</span>&nbsp; 2025 //</footer>
+
+<script>
+// FLOATING PARTICLES
+const canvas = document.getElementById('particles');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+const particles = [];
+for(let i=0;i<80;i++){
+  particles.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5+0.3,
+    dx:(Math.random()-0.5)*0.4,
+    dy:(Math.random()-0.5)*0.4,
+    opacity:Math.random()*0.5+0.1,
+    color:Math.random()>0.5?'0,212,255':'0,102,255'
+  });
+}
+
+// CONNECTING LINES
+function drawParticles(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  for(let i=0;i<particles.length;i++){
+    const p=particles[i];
+    p.x+=p.dx; p.y+=p.dy;
+    if(p.x<0||p.x>canvas.width)p.dx*=-1;
+    if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    ctx.beginPath();
+    ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=`rgba(${p.color},${p.opacity})`;
+    ctx.fill();
+    for(let j=i+1;j<particles.length;j++){
+      const p2=particles[j];
+      const dist=Math.hypot(p.x-p2.x,p.y-p2.y);
+      if(dist<120){
+        ctx.beginPath();
+        ctx.moveTo(p.x,p.y);
+        ctx.lineTo(p2.x,p2.y);
+        ctx.strokeStyle=`rgba(0,150,255,${0.06*(1-dist/120)})`;
+        ctx.lineWidth=0.5;
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(drawParticles);
+}
+drawParticles();
+</script>
+</body>
+</html>
